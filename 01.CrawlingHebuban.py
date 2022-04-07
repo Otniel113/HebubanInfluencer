@@ -59,16 +59,16 @@ def validation(isi):
 
 # Parameter/Variabel yang bisa di-custom / isi sendiri
 # 1. Bearer Token API v2
-bearer_token = "ENTER YOUR BEARER TOKEN"
+bearer_token = "INSERT YOUR BEARER TOKEN"
 
 # 2. Query
 query = "#ヘブバン"
 
 # 3. Max Results (per page) dengan rentang nilai min. 10 dan max. 100
-max_results = 10
+max_results = 100
 
 # 4. Banyaknya page. Jumlah tweet yang dicrawl adalah max_results x page
-limit = 1
+limit = 150
 
 # Auth
 client = tweepy.Client(bearer_token)
@@ -92,28 +92,33 @@ pages = tweepy.Paginator(client.search_recent_tweets, query,
                             expansions=["author_id", "referenced_tweets.id.author_id"], limit=limit)
 
 # Dilakukan per pages
+i = 0
 for page in pages:
+    # Melakukan output progress program ada pada page ke berapa
+    i += 1
+    print("Page ke-" + str(i))
     # Membuat Dictionary dengan 2 Function Teratas dari Expansions
     dict_user = create_dictionary_user(page.includes["users"])
     dict_referenced = create_dictionary_referenced(page.includes["tweets"])
 
     # Mendapatkan Data dari Tweet_Fields
-    for i in range(len(page.data)):
-        # Function Get Data
-        tweet_id, author_id, text, created_at, referenced_tweet_id, relation, lang, source, referenced_author_id, referenced_author_username, author_username = get_data(page.data[i], dict_user, dict_referenced)
-        # Menampung hasil get ke list
-        list_tweet_id.append(tweet_id)
-        list_author_id.append(author_id)
-        list_text.append(text)
-        list_created_at.append(created_at)
-        list_referenced_tweet_id.append(referenced_tweet_id)
-        list_relation.append(relation)
-        list_lang.append(lang)
-        list_source.append(source)
-        list_referenced_author_id.append(referenced_author_id)
-        list_referenced_author_username.append(referenced_author_username)
-        list_author_username.append(author_username)
-
+    for j in range(len(page.data)):
+        # Cek jika tidak ada error
+        if (page.errors == []):
+            # Function untuk mendapatkan data
+            tweet_id, author_id, text, created_at, referenced_tweet_id, relation, lang, source, referenced_author_id, referenced_author_username, author_username = get_data(page.data[j], dict_user, dict_referenced)
+            # Menampung hasil get ke list
+            list_tweet_id.append(tweet_id)
+            list_author_id.append(author_id)
+            list_text.append(text)
+            list_created_at.append(created_at)
+            list_referenced_tweet_id.append(referenced_tweet_id)
+            list_relation.append(relation)
+            list_lang.append(lang)
+            list_source.append(source)
+            list_referenced_author_id.append(referenced_author_id)
+            list_referenced_author_username.append(referenced_author_username)
+            list_author_username.append(author_username)
 
 # Mengubah menjadi Dictionary agar dapat diubah menjadi Dataframe
 calon_dataframe = {
@@ -135,3 +140,6 @@ hebuban_df = pd.DataFrame(calon_dataframe)
 
 # Export ke Excel
 hebuban_df.to_excel(r'hebuban_crawling.xlsx', index=False, header=True)
+
+# Selesai
+print("\nCOMPLETED!")
