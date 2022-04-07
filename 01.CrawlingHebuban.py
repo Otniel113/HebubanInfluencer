@@ -114,24 +114,6 @@ for page in pages:
         list_referenced_author_username.append(referenced_author_username)
         list_author_username.append(author_username)
 
-        # Untuk mendapatkan Relasi Like
-        # Bisa di-comment sampai /END jika ingin mempercepat running time
-        like_response = client.get_liking_users(tweet_id)
-        like_data = like_response.data
-        if (like_data != None):
-            for like in like_data:
-                list_tweet_id.append("Tweet ID tidak ada karena relation like")
-                list_author_id.append(like.id)
-                list_text.append(text)
-                list_created_at.append(created_at)
-                list_referenced_tweet_id.append(tweet_id)
-                list_relation.append("liked")
-                list_lang.append(lang)
-                list_source.append(source)
-                list_referenced_author_id.append(author_id)
-                list_referenced_author_username.append(author_username)
-                list_author_username.append(like.username)
-        #/END
 
 # Mengubah menjadi Dictionary agar dapat diubah menjadi Dataframe
 calon_dataframe = {
