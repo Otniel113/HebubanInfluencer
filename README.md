@@ -48,9 +48,9 @@ Dataset didapatkan dengan melakukan metode crawling pada media sosial Twitter be
 | [KegurunekuR33](https://twitter.com/KegurunekuR33) | 0,028999 |
 | [game_tori10](https://twitter.com/game_tori10) | 0,028088 |
 | [ogayan0301](https://twitter.com/ogayan0301) | 0,026894 |
-| [kegani_0207](https://twitter.com/ndjiru_n) | 0,026858 |
-| [DIVAvivylove1](https://twitter.com/ndjiru_n) | 0,026283 |
-| [sera050520](https://twitter.com/ndjiru_n)	| 0.025813 |
+| [kegani_0207](https://twitter.com/kegani_0207) | 0,026858 |
+| [DIVAvivylove1](https://twitter.com/DIVAvivylove1) | 0,026283 |
+| [sera050520](https://twitter.com/sera050520)	| 0.025813 |
 
 ## Kesimpulan dan Saran
 1. Kesimpulan
